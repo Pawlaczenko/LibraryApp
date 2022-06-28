@@ -16,11 +16,16 @@ namespace LibraryApp
     /// </summary>
     public partial class App : Application
     {
+        private readonly Library _library;
+        public App()
+        {
+            _library = new Library("Biblioteka Nova");
+        }
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel()
+                DataContext = new MainViewModel(_library)
             };
             MainWindow.Show();
 

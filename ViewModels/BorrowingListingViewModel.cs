@@ -19,6 +19,8 @@ namespace LibraryApp.ViewModels
         {
             _borrowings = new ObservableCollection<BorrowingViewModel>();
 
+            CreateBorrowingCommand = new NavigateCommand();
+
             _borrowings.Add(new BorrowingViewModel(new Borrowing(new BookCopy(1, "Diuna"), DateTime.Now, "123123123")));
             _borrowings.Add(new BorrowingViewModel(new Borrowing(new BookCopy(2, "Diuna 2"), DateTime.Now, "123123123")));
             _borrowings.Add(new BorrowingViewModel(new Borrowing(new BookCopy(3, "Diuna 3"), DateTime.Now, "123123123")));

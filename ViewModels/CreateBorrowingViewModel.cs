@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibraryApp.Commands;
+using LibraryApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +33,7 @@ namespace LibraryApp.ViewModels
             }
         }
 
-        private DateTime _borrowingDate;
+        private DateTime _borrowingDate = DateTime.Now;
         public DateTime BorrowingDate
         {
             get { return _borrowingDate; }
@@ -45,9 +47,10 @@ namespace LibraryApp.ViewModels
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public CreateBorrowingViewModel()
+        public CreateBorrowingViewModel(Library library)
         {
-
+            SubmitCommand = new CreateBorrowingCommand(this, library);
+            CancelCommand = new CancelCreateBorrowingCommand();
         }
     }
 }
