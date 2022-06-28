@@ -18,17 +18,23 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="View All Borrowed Books"  Style="{StaticResource Header}"/>
-            <Button Content="Create Borrowing" Grid.Column="1" Margin="10 0 0 0" />
+            <TextBlock Grid.Column="0" 
+                       Text="View All 
+                       Borrowed Books"  
+                       Style="{StaticResource Header}"/>
+            <Button Content="Create Borrowing" 
+                    Grid.Column="1" 
+                    Margin="10 0 0 0" 
+                    Command="{Binding CreateBorrowingCommand}"/>
         </Grid>
 
-        <ListView Grid.Row="1" Margin="0 25 0 0">
-            <ListViewItem />
-            <ListViewItem />
-            <ListViewItem />
+        <ListView Grid.Row="1" 
+                  Margin="0 25 0 0" 
+                  ItemsSource="{Binding Borrowings}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" 
+                            Value="Stretch" />
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.View>
@@ -36,7 +42,18 @@
                     <GridViewColumn Header="Book Id">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="12" Padding="0 0 20 0"/>
+                                <TextBlock HorizontalAlignment="Center" 
+                                           Text="{Binding BookId}" 
+                                           Padding="0 0 20 0"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Book Title">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BookTitle}" 
+                                           Padding="0 0 20 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -44,7 +61,8 @@
                     <GridViewColumn Header="Reader Card Number">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="12313124124" Padding="0 0 20 0" />
+                                <TextBlock Text="{Binding ReaderCardNumber}" 
+                                           Padding="0 0 20 0" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -52,7 +70,8 @@
                     <GridViewColumn Header="Date">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="12-12-2020" Padding="0 0 20 0" />
+                                <TextBlock Text="{Binding BorrowingDate}" 
+                                           Padding="0 0 20 0" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

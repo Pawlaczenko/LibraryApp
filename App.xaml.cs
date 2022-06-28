@@ -1,5 +1,6 @@
 ﻿using LibraryApp.Exceptions;
 using LibraryApp.Models;
+using LibraryApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,22 +18,11 @@ namespace LibraryApp
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Library library = new Library("Biblioteka Nova");
-
-            try
+            MainWindow = new MainWindow()
             {
-
-                library.CreateBorrowing(new Borrowing(
-                    new BookCopy(1, "Diuna"), new DateTime(2022, 4, 4), "123123123"));
-                library.CreateBorrowing(new Borrowing(
-                    new BookCopy(2, "Pablo Escobar"), new DateTime(2022, 4, 4), "123123123"));
-            }
-            catch (BorrowingConflictException ex)
-            {
-
-            }
-
-            IEnumerable<Borrowing> borrowings = library.GetBorrowings();
+                DataContext = new MainViewModel()
+            };
+            MainWindow.Show();
 
             base.OnStartup(e);
         }

@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="LibraryApp" Height="450" Width="800" FontSize="16">
     <Grid Margin="20 10" MaxWidth="600">
-        <views:BorrowingListingView />
+        <views:BorrowingListingView DataContext="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>
