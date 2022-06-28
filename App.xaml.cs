@@ -32,7 +32,7 @@ namespace LibraryApp
 
             }
 
-            IEnumerable<Borrowing> borrowings = library.GetBorrowingsForUser("123123123");
+            IEnumerable<Borrowing> borrowings = library.GetBorrowings();
 
             base.OnStartup(e);
         }

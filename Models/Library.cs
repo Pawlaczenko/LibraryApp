@@ -19,13 +19,12 @@ namespace LibraryApp.Models
         }
 
         /// <summary>
-        /// Get all the user's borrowings
+        /// Get all the borrowings
         /// </summary>
-        /// <param name="readerCardNumber">Library Card Number of a user</param>
-        /// <returns>The borrowings for the user</returns>
-        public IEnumerable<Borrowing> GetBorrowingsForUser(string readerCardNumber)
+        /// <returns>All borrowing</returns>
+        public IEnumerable<Borrowing> GetBorrowings()
         {
-            return _borrowings.Where(b => b.ReaderCardNumber == readerCardNumber);
+            return _borrowings;
         }
 
         /// <summary>
