@@ -1,4 +1,7 @@
-﻿using LibraryApp.Models;
+﻿using LibraryApp.Commands;
+using LibraryApp.Models;
+using LibraryApp.Services;
+using LibraryApp.Stores;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,20 +14,30 @@ namespace LibraryApp.ViewModels
 {
     public class BorrowingListingViewModel :ViewModelBase
     {
+        private readonly Library _library;
         private readonly ObservableCollection<BorrowingViewModel> _borrowings;
         public IEnumerable<BorrowingViewModel> Borrowings => _borrowings;
         public ICommand CreateBorrowingCommand { get; }
 
-        public BorrowingListingViewModel()
+        public BorrowingListingViewModel(Library library, NavigationService createBorrowingNavigationService)
         {
+            _library = library;
             _borrowings = new ObservableCollection<BorrowingViewModel>();
 
-            CreateBorrowingCommand = new NavigateCommand();
+            CreateBorrowingCommand = new NavigateCommand(createBorrowingNavigationService);
 
-            _borrowings.Add(new BorrowingViewModel(new Borrowing(new BookCopy(1, "Diuna"), DateTime.Now, "123123123")));
-            _borrowings.Add(new BorrowingViewModel(new Borrowing(new BookCopy(2, "Diuna 2"), DateTime.Now, "123123123")));
-            _borrowings.Add(new BorrowingViewModel(new Borrowing(new BookCopy(3, "Diuna 3"), DateTime.Now, "123123123")));
-            _borrowings.Add(new BorrowingViewModel(new Borrowing(new BookCopy(4, "Koniec Świata"), DateTime.Now, "43213123")));
+            UpdateBorrowings();
+        }
+
+        private void UpdateBorrowings()
+        {
+            _borrowings.Clear();
+
+            foreach(Borrowing borrowing in _library.GetBorrowings())
+            {
+                BorrowingViewModel borrowingViewModel = new BorrowingViewModel(borrowing);
+                _borrowings.Add(borrowingViewModel);
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using LibraryApp.Commands;
 using LibraryApp.Models;
+using LibraryApp.Services;
+using LibraryApp.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,10 +49,10 @@ namespace LibraryApp.ViewModels
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public CreateBorrowingViewModel(Library library)
+        public CreateBorrowingViewModel(Library library, NavigationService borrowingViewNavigationService)
         {
-            SubmitCommand = new CreateBorrowingCommand(this, library);
-            CancelCommand = new CancelCreateBorrowingCommand();
+            SubmitCommand = new CreateBorrowingCommand(this, library, borrowingViewNavigationService);
+            CancelCommand = new NavigateCommand(borrowingViewNavigationService);
         }
     }
 }

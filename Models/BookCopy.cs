@@ -10,11 +10,15 @@ namespace LibraryApp.Models
     {
         public int BookCopyId { get; }
         public string Title { get; }
+        public bool IsBorrowed { get; set; }
+        public DateTime ReleaseDate { get; set; }
 
-        public BookCopy(int bookCopyId, string title)
+        public BookCopy(int bookCopyId, string title, DateTime releaseDate, bool isBorrowed = false)
         {
             BookCopyId = bookCopyId;
             Title = title;
+            IsBorrowed = isBorrowed;
+            ReleaseDate = releaseDate;
         }
 
         public override bool Equals(object? obj)

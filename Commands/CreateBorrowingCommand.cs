@@ -1,5 +1,6 @@
 ﻿using LibraryApp.Exceptions;
 using LibraryApp.Models;
+using LibraryApp.Services;
 using LibraryApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,13 @@ namespace LibraryApp.Commands
     {
         private readonly Library _library;
         private readonly CreateBorrowingViewModel _createBorrowingViewModel;
+        private readonly NavigationService _borrowingViewNavigationService;
 
-        public CreateBorrowingCommand(CreateBorrowingViewModel borrowing, Library library)
+        public CreateBorrowingCommand(CreateBorrowingViewModel borrowing, Library library, NavigationService borrowingViewNavigationService)
         {
             _library = library;
             _createBorrowingViewModel = borrowing;
+            _borrowingViewNavigationService = borrowingViewNavigationService;
 
             _createBorrowingViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
@@ -41,6 +44,8 @@ namespace LibraryApp.Commands
             {
                 _library.CreateBorrowing(borrowing);
                 MessageBox.Show("Successfully borrowed book.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                _borrowingViewNavigationService.Navigate();
             }
             catch (BorrowingConflictException ex)
             {

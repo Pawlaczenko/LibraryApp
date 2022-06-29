@@ -5,9 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryApp" 
         xmlns:views="clr-namespace:LibraryApp.Views"
+        xmlns:vms="clr-namespace:LibraryApp.ViewModels"
         mc:Ignorable="d"
         Title="LibraryApp" Height="450" Width="800" FontSize="16">
     <Grid Margin="20 10" MaxWidth="600">
-        <views:BorrowingListingView DataContext="{Binding CurrentViewModel}"/>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type vms:CreateBorrowingViewModel}">
+                <views:CreateBorrowingView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:BorrowingListingViewModel}">
+                <views:BorrowingListingView />
+            </DataTemplate>
+        </Grid.Resources>
+
+        <ContentControl Content="{Binding CurrentViewModel}" />
+
     </Grid>
 </Window>
