@@ -35,8 +35,7 @@ namespace LibraryApp.Commands
         public override void Execute(object? parameter)
         {
             Borrowing borrowing = new Borrowing(
-                new BookCopy(
-                _createBorrowingViewModel.BookId, "Shrek"),
+                new BookCopy(_createBorrowingViewModel.BookId, "Shrek",DateTime.Now),
                 _createBorrowingViewModel.BorrowingDate,
                 _createBorrowingViewModel.CardNumber);
 
