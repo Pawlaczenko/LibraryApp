@@ -1,4 +1,5 @@
 ﻿using LibraryApp.Exceptions;
+using LibraryApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +11,21 @@ namespace LibraryApp.Models
     public class Library
     {
         public string Name { get; }
-        private readonly List<Borrowing> _borrowings;
+        private readonly IBorrowingService _borrowingService;
 
-        public Library(string name)
+        public Library(string name, IBorrowingService borrowingService)
         {
             Name = name;
-            _borrowings = new List<Borrowing>();
+            _borrowingService = borrowingService;
         }
 
         /// <summary>
         /// Get all the borrowings
         /// </summary>
         /// <returns>All borrowing</returns>
-        public IEnumerable<Borrowing> GetBorrowings()
+        public async Task<IEnumerable<Borrowing>> GetBorrowings()
         {
-            return _borrowings;
+            return await _borrowingService.GetAllBorrowings();
         }
 
         /// <summary>
@@ -34,15 +35,14 @@ namespace LibraryApp.Models
         /// <exception cref="BorrowingConflictException"></exception>
         public void CreateBorrowing(Borrowing borrowing)
         {
-            foreach(Borrowing existingBorrowing in _borrowings)
-            {
-                if (existingBorrowing.Conflicts(borrowing))
-                {
-                    throw new BorrowingConflictException(existingBorrowing,borrowing);
-                }
-            }
+            //foreach(Borrowing existingBorrowing in _borrowings)
+            //{
+            //    if (existingBorrowing.Conflicts(borrowing))
+            //    {
+            //        throw new BorrowingConflictException(existingBorrowing,borrowing);
+            //    }
+            //}
 
-            _borrowings.Add(borrowing);
         }
     }
 }

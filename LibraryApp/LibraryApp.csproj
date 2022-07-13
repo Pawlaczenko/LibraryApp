@@ -16,4 +16,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryDataAccess\LibraryDataAccess.csproj" />
+    <ProjectReference Include="..\LibraryModels\LibraryModels.csproj" />
+  </ItemGroup>
+
 </Project>

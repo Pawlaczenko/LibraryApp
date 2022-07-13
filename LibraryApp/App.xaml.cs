@@ -1,8 +1,10 @@
-﻿using LibraryApp.Exceptions;
+﻿using LibraryApp.AppDbContext;
+using LibraryApp.Exceptions;
 using LibraryApp.Models;
 using LibraryApp.Services;
 using LibraryApp.Stores;
 using LibraryApp.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,6 +20,8 @@ namespace LibraryApp
     /// </summary>
     public partial class App : Application
     {
+        private const string CONNECTION_STRING = "Data Source=library.db";
+
         private readonly Library _library;
         private readonly NavigationStore _navigationStore;
         public App()
@@ -27,6 +31,12 @@ namespace LibraryApp
         }
         protected override void OnStartup(StartupEventArgs e)
         {
+            DbContextOptions options = new DbContextOptionsBuilder().UseSqlite(CONNECTION_STRING).Options;
+            using (LibraryDbContext dbContext = new LibraryDbContext(options))
+            {
+                dbContext.Database.Migrate();
+            };
+
             _navigationStore.CurrentViewModel = MakeBorrowingListingViewModel(); //starging page view model
             MainWindow = new MainWindow()
             {

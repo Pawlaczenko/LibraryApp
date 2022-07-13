@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryApp.AppDbContext
+namespace LibraryApp.Models
 {
-    public class ReaderEntity
+    public class Reader
     {
-        [Key]
-        public Guid ReaderId { get; set; }
-        [Required]
         public string CardNumber { get; set; }
-        [Required]
         public string FirstName { get; set; }
-        [Required]
         public string LastName { get; set; }
+
+        public ICollection<Borrowing> Borrowings { get; set; }
     }
 }

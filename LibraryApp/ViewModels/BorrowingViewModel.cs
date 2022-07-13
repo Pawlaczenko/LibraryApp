@@ -14,7 +14,7 @@ namespace LibraryApp.ViewModels
         public int BookId => _borrowing.BookCopy.BookCopyId;
         public string BookTitle => _borrowing.BookCopy.Title;
         public string BorrowingDate => _borrowing.BorrowingDate.ToString("d");
-        public string ReaderCardNumber => _borrowing.ReaderCardNumber;
+        public string ReaderCardNumber => _borrowing.Reader.CardNumber;
 
         public BorrowingViewModel(Borrowing borrowing)
         {
